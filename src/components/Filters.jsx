@@ -1,47 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchContent } from '../redux/contentSlice';
+import { useNavigate } from 'react-router-dom';
+import debounce from 'lodash/debounce';
 
-function Filters({ onFilterChange }) {
+function Filters() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [filters, setFilters] = useState({
     tags: 'story',
-    sortBy: 'popularity',
-    numericFilters: 'all'
+    sortBy: 'points',
+    numericFilters: null
   });
+
+  const debouncedFetchContent = useCallback(
+    debounce((newFilters) => {
+      dispatch(fetchContent({
+        page: 0,
+        filters: newFilters
+      }));
+    }, 300),
+    [dispatch]
+  );
 
   const handleFilterChange = (key, value) => {
     let newValue = value;
     
     if (key === 'numericFilters') {
-      const now = Math.floor(Date.now() / 1000);
-      switch (value) {
-        case 'last24h':
-          newValue = `created_at_i>${now - 86400}`;
-          break;
-        case 'pastWeek':
-          newValue = `created_at_i>${now - 604800}`;
-          break;
-        case 'pastMonth':
-          newValue = `created_at_i>${now - 2592000}`;
-          break;
-        case 'pastYear':
-          newValue = `created_at_i>${now - 31536000}`;
-          break;
-        default:
-          newValue = null;
+      if (value === 'all') {
+        newValue = null;
+      } else {
+        const now = Math.floor(Date.now() / 1000);
+        switch (value) {
+          case 'last24h':
+            newValue = `created_at_i>${now - 86400}`;
+            break;
+          case 'pastWeek':
+            newValue = `created_at_i>${now - 604800}`;
+            break;
+          case 'pastMonth':
+            newValue = `created_at_i>${now - 2592000}`;
+            break;
+          case 'pastYear':
+            newValue = `created_at_i>${now - 31536000}`;
+            break;
+          default:
+            newValue = null;
+        }
       }
     }
-
+  
     if (key === 'sortBy') {
       newValue = value === 'date' ? 'created_at_i' : 'points';
     }
 
-    if (key === 'tags') {
-      newValue = value === 'front_page' ? 'front_page' : value;
-    }
-
     const newFilters = { ...filters, [key]: newValue };
     setFilters(newFilters);
-    onFilterChange?.(newFilters);
+    
+    const searchParams = new URLSearchParams();
+    Object.entries(newFilters).forEach(([key, value]) => {
+      if (value) searchParams.append(key, value);
+    });
+    
+    navigate(`?${searchParams.toString()}`);
+    
+    debouncedFetchContent(newFilters);
   };
+
+  useEffect(() => {
+    dispatch(fetchContent({ filters }));
+  }, [dispatch]);
 
   return (
     <div className="filters-container"
