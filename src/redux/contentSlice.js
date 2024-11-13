@@ -7,7 +7,12 @@ const API_URL = 'https://hn.algolia.com/api/v1/search';
 export const fetchContent = createAsyncThunk(
   'content/fetchContent',
   async ({ query = '', page = 0, filters = {} }) => {
-    const response = await axios.get(`${API_URL}?query=${query}&page=${page}&${filters}`);
+    const params = new URLSearchParams({
+      query: query,
+      page: page.toString(),
+      ...filters
+    });
+    const response = await axios.get(`${API_URL}?${params.toString()}`);
     return response.data;
   }
 );

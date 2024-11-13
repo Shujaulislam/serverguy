@@ -17,7 +17,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{ width: '100%' }}>
       <Toolbar style={{ backgroundColor: '#FF742B' }}>
         <Typography variant="h6" style={{ flexGrow: 1, color: 'black' }}>
           HN Algolia Clone

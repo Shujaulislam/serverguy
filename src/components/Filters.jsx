@@ -17,7 +17,7 @@ function Filters({ onFilterChange }) {
     <div className="filters-container"
     style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px', backgroundColor: '#F6F6F6' }}>
       <span
-      style={{ fontWeight: 'bold', color: '#000', fontSize: '14px' }}
+      style={{ color: '#000', fontSize: '14px' }}
       >Search</span>
 
       <select
@@ -55,6 +55,22 @@ function Filters({ onFilterChange }) {
       <select
         value={filters.date}
         onChange={(e) => handleFilterChange('date', e.target.value)}
+        style={{ 
+          padding: '4px 8px', 
+          borderRadius: '3px', 
+          border: '1px solid #D8D8D8', 
+          fontSize: '14px', 
+          cursor: 'pointer', 
+          backgroundColor: 'white', 
+          color: '#000',
+          '&:hover': {
+            borderColor: '#FF742B'
+          },
+          '&:focus': {
+            borderColor: '#999',
+            outline: 'none'
+          }
+        }}
       >
         <option value="popularity">Popularity</option>
         <option value="date">Date</option>
@@ -65,6 +81,22 @@ function Filters({ onFilterChange }) {
       <select
         value={filters.timeRange}
         onChange={(e) => handleFilterChange('timeRange', e.target.value)}
+        style={{ 
+          padding: '4px 8px', 
+          borderRadius: '3px', 
+          border: '1px solid #D8D8D8', 
+          fontSize: '14px', 
+          cursor: 'pointer', 
+          backgroundColor: 'white', 
+          color: '#000',
+          '&:hover': {
+            borderColor: '#FF742B'
+          },
+          '&:focus': {
+            borderColor: '#999',
+            outline: 'none'
+          }
+        }}
       >
         <option value="all">All time</option>
         <option value="last24h">Last 24h</option>

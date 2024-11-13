@@ -1,6 +1,6 @@
 // src/components/Content.js
 import React, { useEffect } from 'react';
-import { Box, Card, CardContent, Typography, Grid2 } from '@mui/material';
+import { Box, Card, CardContent, Typography, Grid2, CircularProgress } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchContent, setCurrentPage } from '../redux/contentSlice';
 import { PaginationRounded } from './Footer';
@@ -20,7 +20,7 @@ function Content() {
   return (
     <Box my={4}>
       <Grid2 container spacing={2}>
-        {status === 'loading' && <Typography>Loading...</Typography>}
+        {status === 'loading' && <CircularProgress color="inherit" />}
         {status === 'succeeded' && items.map((item) => (
           <Grid2 item xs={12} key={item.objectID}>
             <Card variant="outlined">
