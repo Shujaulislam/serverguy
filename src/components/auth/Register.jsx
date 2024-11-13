@@ -10,8 +10,8 @@ const RegisterPage = () => {
     email: '',
     password: '',
   });
-  const [errors, setErrors] = useState<string>('');
-  const [successMessage, setSuccessMessage] = useState<string>('');
+  const [errors, setErrors] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
 
   const handleChange = (e) => {

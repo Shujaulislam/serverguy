@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'
 
 
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -10,7 +11,7 @@ const LoginPage = () => {
     email: '',
     password: '',
   });
-  const [errors, setErrors] = useState<string>('');
+  const [errors, setErrors] = useState('');
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
