@@ -55,12 +55,12 @@ export const fetchContent = createAsyncThunk(
       }
 
       // Handle sorting - Algolia expects different parameter names
-      if (filters.sortBy) {
-        if (filters.sortBy === 'points') {
+      if (filters.sort) {
+        if (filters.sort === 'points') {
           apiParams.numericFilters = 'points>0';
-          apiParams.sortBy = 'points';
-        } else if (filters.sortBy === 'created_at_i') {
-          apiParams.sortBy = 'created_at_i';
+          apiParams.sort = 'points';
+        } else if (filters.sort === 'created_at_i') {
+          apiParams.sort = 'created_at_i';
         }
       }
 
@@ -96,7 +96,7 @@ export const fetchContent = createAsyncThunk(
         headers: {
           'Content-Type': 'application/json',
         },
-        timeout: 5000
+        // timeout: 5000
       });
 
       // Cache the result

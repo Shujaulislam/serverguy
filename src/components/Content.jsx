@@ -18,8 +18,8 @@ function Content() {
   };
 
   return (
-    <Box my={4} width="100%">
-      {status === 'loading' && <CircularProgress color="inherit" />}
+    <Box my={4} className='w-full bg-white'>
+      {/* {status === 'loading' && <CircularProgress color="inherit" />} */}
       {status === 'succeeded' && (
         <div style={{ paddingLeft: '1em' }}>
           {items.map((item) => (

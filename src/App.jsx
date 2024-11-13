@@ -14,8 +14,8 @@ function App() {
 
   return (
     <AuthProvider>
-      <Container maxWidth="md">
-        <CssBaseline />
+      <Container maxWidth="xl">
+        {/* <CssBaseline /> */}
         <AuthRoutes />
         <Navbar />
         <Filters />
