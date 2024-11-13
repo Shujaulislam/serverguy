@@ -30,6 +30,30 @@ body {
   /* min-height: 100vh; */
 }
 
+/* Add these styles to your existing index.css */
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  line-height: 1.5;
+}
+
+a:hover {
+  text-decoration: underline !important;
+}
+
+.meta-text {
+  color: #666;
+  font-size: 12px;
+}
+
+.domain-text {
+  color: #666;
+  font-size: 12px;
+  margin-left: 5px;
+}
 
 @media (prefers-color-scheme: light) {
   :root {

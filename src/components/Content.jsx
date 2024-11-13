@@ -1,6 +1,6 @@
 // src/components/Content.js
 import React, { useEffect } from 'react';
-import { Box, Card, CardContent, Typography, Grid2, CircularProgress } from '@mui/material';
+import { Box, Typography, Grid2, CircularProgress } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchContent, setCurrentPage } from '../redux/contentSlice';
 import { PaginationRounded } from './Footer';
@@ -14,27 +14,47 @@ function Content() {
   }, [dispatch, query, currentPage]);
 
   const handlePageChange = (newPage) => {
-    dispatch(setCurrentPage(newPage - 1)); // Algolia uses 0-based indexing
+    dispatch(setCurrentPage(newPage - 1));
   };
 
   return (
-    <Box my={4}>
-      <Grid2 container spacing={2}>
-        {status === 'loading' && <CircularProgress color="inherit" />}
-        {status === 'succeeded' && items.map((item) => (
-          <Grid2 item xs={12} key={item.objectID}>
-            <Card variant="outlined">
-              <CardContent>
-                <Typography variant="h6">{item.title || 'No Title'}</Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {item.url || 'No URL'}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid2>
-        ))}
-        {status === 'failed' && <Typography>Error fetching data.</Typography>}
-      </Grid2>
+    <Box my={4} width="100%">
+      {status === 'loading' && <CircularProgress color="inherit" />}
+      {status === 'succeeded' && (
+        <div style={{ paddingLeft: '1em' }}>
+          {items.map((item) => (
+            <div key={item.objectID} style={{ marginBottom: '8px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div>
+                  <a 
+                    href={item.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ 
+                      color: '#000000', 
+                      textDecoration: 'none',
+                      fontSize: '14px',
+                      fontWeight: '400',
+                    }}
+                  >
+                    {item.title || 'No Title'}
+                  </a>
+                  {item.url && (
+                    <span style={{ color: '#666', fontSize: '12px', marginLeft: '5px' }}>
+                      ({new URL(item.url).hostname})
+                    </span>
+                  )}
+                </div>
+                <div style={{ fontSize: '12px', color: '#666', marginTop: '3px' }}>
+                  {item.points} points | {item.author} | {item.created_at} | {item.num_comments} comments
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {status === 'failed' && <Typography>Error fetching data.</Typography>}
+      
       {status === 'succeeded' && (
         <Box mt={2} display="flex" justifyContent="center">
           <PaginationRounded 
