@@ -2,13 +2,43 @@ import React, { useState } from 'react';
 
 function Filters({ onFilterChange }) {
   const [filters, setFilters] = useState({
-    storyType: 'story',
-    date: 'popularity',
-    timeRange: 'all'
+    tags: 'story',
+    sortBy: 'popularity',
+    numericFilters: 'all'
   });
 
   const handleFilterChange = (key, value) => {
-    const newFilters = { ...filters, [key]: value };
+    let newValue = value;
+    
+    if (key === 'numericFilters') {
+      const now = Math.floor(Date.now() / 1000);
+      switch (value) {
+        case 'last24h':
+          newValue = `created_at_i>${now - 86400}`;
+          break;
+        case 'pastWeek':
+          newValue = `created_at_i>${now - 604800}`;
+          break;
+        case 'pastMonth':
+          newValue = `created_at_i>${now - 2592000}`;
+          break;
+        case 'pastYear':
+          newValue = `created_at_i>${now - 31536000}`;
+          break;
+        default:
+          newValue = null;
+      }
+    }
+
+    if (key === 'sortBy') {
+      newValue = value === 'date' ? 'created_at_i' : 'points';
+    }
+
+    if (key === 'tags') {
+      newValue = value === 'front_page' ? 'front_page' : value;
+    }
+
+    const newFilters = { ...filters, [key]: newValue };
     setFilters(newFilters);
     onFilterChange?.(newFilters);
   };
@@ -21,8 +51,8 @@ function Filters({ onFilterChange }) {
       >Search</span>
 
       <select
-        value={filters.storyType}
-        onChange={(e) => handleFilterChange('storyType', e.target.value)}
+        value={filters.tags}
+        onChange={(e) => handleFilterChange('tags', e.target.value)}
         style={{ 
           padding: '4px 8px', 
           borderRadius: '3px', 
@@ -53,8 +83,8 @@ function Filters({ onFilterChange }) {
       <span>by</span>
 
       <select
-        value={filters.date}
-        onChange={(e) => handleFilterChange('date', e.target.value)}
+        value={filters.sortBy === 'points' ? 'popularity' : 'date'}
+        onChange={(e) => handleFilterChange('sortBy', e.target.value)}
         style={{ 
           padding: '4px 8px', 
           borderRadius: '3px', 
@@ -79,8 +109,8 @@ function Filters({ onFilterChange }) {
       <span>for</span>
 
       <select
-        value={filters.timeRange}
-        onChange={(e) => handleFilterChange('timeRange', e.target.value)}
+        value={filters.numericFilters === null ? 'all' : filters.numericFilters}
+        onChange={(e) => handleFilterChange('numericFilters', e.target.value)}
         style={{ 
           padding: '4px 8px', 
           borderRadius: '3px', 
