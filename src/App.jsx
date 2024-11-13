@@ -1,6 +1,8 @@
 // src/App.js
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { AuthProvider } from './context/AuthContext';
+import AuthRoutes from './routes/AuthRoutes';
 import Navbar from './components/Navbar';
 import Content from './components/Content';
 import Footer from './components/Footer';
@@ -11,13 +13,16 @@ function App() {
   const { items, status } = useSelector((state) => state.content);
 
   return (
-    <Container maxWidth="md">
-      <CssBaseline />
-      <Navbar />
-      <Filters />
-      <Content />
-      <Footer />
-    </Container>
+    <AuthProvider>
+      <Container maxWidth="md">
+        <CssBaseline />
+        <AuthRoutes />
+        <Navbar />
+        <Filters />
+        <Content />
+        <Footer />
+      </Container>
+    </AuthProvider>
   );
 }
 
