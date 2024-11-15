@@ -54,13 +54,13 @@ const RegisterPage = () => {
         onSubmit={handleSubmit}
         className="p-8 bg-white rounded shadow-md w-96"
       >
-        <h2 className="mb-6 text-2xl font-bold text-center">Register</h2>
+        <h2 className="mb-6 text-2xl font-bold text-center text-gray-900">Register</h2>
         {successMessage && (
          <p className="mb-4 text-green-500">{successMessage}</p>
        )}
         {errors && <p className="mb-4 text-red-500">{errors}</p>}
         <div className="mb-4">
-          <label className="block mb-1">Name</label>
+          <label className="block mb-1 text-gray-900">Name</label>
           <input
             type="text"
             name="name"
@@ -70,7 +70,7 @@ const RegisterPage = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block mb-1">Email</label>
+          <label className="block mb-1 text-gray-900">Email</label>
           <input
             type="email"
             name="email"
@@ -80,7 +80,7 @@ const RegisterPage = () => {
           />
         </div>
         <div className="mb-6">
-          <label className="block mb-1">Password</label>
+          <label className="block mb-1 text-gray-900">Password</label>
           <input
             type="password"
             name="password"
@@ -95,7 +95,7 @@ const RegisterPage = () => {
         >
           Register
         </button>
-        <p className="mt-4 text-center">
+        <p className="mt-4 text-center text-gray-900">
          Already have an account?{' '}
          <button
           type="button"

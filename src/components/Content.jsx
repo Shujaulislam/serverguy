@@ -1,9 +1,9 @@
-// src/components/Content.js
 import React, { useEffect } from 'react';
-import { Box, Typography, Grid2, CircularProgress } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchContent, setCurrentPage } from '../redux/contentSlice';
-import { PaginationRounded } from './Footer';
+import PaginationRound from './Pagination';
+
 
 function Content() {
   const dispatch = useDispatch();
@@ -18,13 +18,12 @@ function Content() {
   };
 
   return (
-    <Box my={4} className='w-full bg-white'>
-      {/* {status === 'loading' && <CircularProgress color="inherit" />} */}
+    <Box className='w-full bg-[#F6F6EF]'>
       {status === 'succeeded' && (
         <div style={{ paddingLeft: '1em' }}>
           {items.map((item) => (
             <div key={item.objectID} style={{ marginBottom: '8px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className=" flex flex-col mb-2 " >
                 <div>
                   <a 
                     href={item.url} 
@@ -33,19 +32,19 @@ function Content() {
                     style={{ 
                       color: '#000000', 
                       textDecoration: 'none',
-                      fontSize: '14px',
+                      fontSize: '16px',
                       fontWeight: '400',
                     }}
                   >
                     {item.title || 'No Title'}
                   </a>
                   {item.url && (
-                    <span style={{ color: '#666', fontSize: '12px', marginLeft: '5px' }}>
+                    <span style={{ color: '#666', fontSize: '14px', marginLeft: '5px' }}>
                       ({new URL(item.url).hostname})
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize: '12px', color: '#666', marginTop: '3px' }}>
+                <div style={{ fontSize: '14px', color: '#666', marginTop: '3px' }}>
                   {item.points} points | {item.author} | {item.created_at} | {item.num_comments} comments
                 </div>
               </div>
@@ -57,7 +56,7 @@ function Content() {
       
       {status === 'succeeded' && (
         <Box mt={2} display="flex" justifyContent="center">
-          <PaginationRounded 
+          <PaginationRound 
             page={currentPage + 1}
             totalPages={totalPages}
             onPageChange={handlePageChange}

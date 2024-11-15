@@ -39,7 +39,7 @@ export const fetchContent = createAsyncThunk(
   'content/fetchContent',
   async ({ query = '', page = 0, filters = {} }, { rejectWithValue }) => {
     try {
-      // Construct API parameters
+      // API parameters
       const apiParams = {
         page: page.toString(),
       };
@@ -54,7 +54,7 @@ export const fetchContent = createAsyncThunk(
         apiParams.tags = filters.tags;
       }
 
-      // Handle sorting - Algolia expects different parameter names
+      // Handle sorting - parameter names may or may not match for error refer Algolia API docs
       if (filters.sort) {
         if (filters.sort === 'points') {
           apiParams.numericFilters = 'points>0';
@@ -96,7 +96,7 @@ export const fetchContent = createAsyncThunk(
         headers: {
           'Content-Type': 'application/json',
         },
-        // timeout: 5000
+        // timeout: 5000 // slowing the refereshing
       });
 
       // Cache the result

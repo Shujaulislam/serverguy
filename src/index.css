@@ -10,7 +10,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #000000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,7 +20,7 @@
 
 a {
   font-weight: 500;
-  color: #090909;
+  color: #ffffff;
   text-decoration: inherit;
 }
 a:hover {
@@ -28,7 +28,6 @@ a:hover {
 }
 
 
-/* Add these styles to your existing index.css */
 ol {
   margin: 0;
   padding: 0;

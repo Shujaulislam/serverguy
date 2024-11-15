@@ -2,6 +2,9 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import LoginPage from '../components/auth/Login';
 import RegisterPage from '../components/auth/Register';
+import PageNotFound from '../components/PageNotFound';
+
+
 
 // Protected Route wrapper component
 const ProtectedRoute = ({ children }) => {
@@ -51,14 +54,16 @@ const AuthRoutes = () => {
         path="/dashboard"
         element={
           <ProtectedRoute>
-            <div>Dashboard Page</div> {/* Replace with your Dashboard component */}
+            <>
+            </>
           </ProtectedRoute>
         }
       />
 
       {/* Redirect root to login */}
       <Route path="/" element={<Navigate to="/login" replace />} />
-    </Routes>
+      
+   </Routes>
   );
 };
 

@@ -46,10 +46,10 @@ const LoginPage = () => {
         onSubmit={handleSubmit}
         className="p-8 bg-white rounded shadow-md w-96"
       >
-        <h2 className="mb-6 text-2xl font-bold text-center">Login</h2>
+        <h2 className="mb-6 text-2xl font-bold text-center text-gray-900">Login</h2>
         {errors && <p className="mb-4 text-red-500">{errors}</p>}
         <div className="mb-4">
-          <label className="block mb-1">Email</label>
+          <label className="block mb-1 text-gray-900">Email</label>
           <input
             type="email"
             name="email"
@@ -59,7 +59,7 @@ const LoginPage = () => {
           />
         </div>
         <div className="mb-6">
-          <label className="block mb-1">Password</label>
+          <label className="block mb-1 text-gray-900">Password</label>
           <input
             type="password"
             name="password"
