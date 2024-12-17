@@ -2,8 +2,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import LoginPage from '../components/auth/Login';
 import RegisterPage from '../components/auth/Register';
-import PageNotFound from '../components/PageNotFound';
-
 
 
 // Protected Route wrapper component
